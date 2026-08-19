@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Book Management System</title>
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 { text-align: center; color: #333; }
+        input {
+            width: 92%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background: #218838; }
+        ul { list-style: none; padding: 0; margin-top: 20px; }
+        li {
+            background: #eee;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: auto;
+            font-size: 12px;
+        }
+        .delete-btn:hover { background: #bd2130; }
+    </style>
+</head>
+<body>
+
+    <!-- HTML Structure -->
+    <div class="container">
+        <h2>E-Book Manager</h2>
+        <input type="text" id="title" placeholder="Book Title">
+        <input type="text" id="author" placeholder="Author Name">
+        <button onclick="addBook()">Add Book</button>
+        
+        <ul id="bookList"></ul>
+    </div>
+
+    <!-- JavaScript Functionality -->
+    <script>
+        function addBook() {
+            const titleInput = document.getElementById('title');
+            const authorInput = document.getElementById('author');
+            const bookList = document.getElementById('bookList');
+
+            // Validate inputs
+            if (titleInput.value.trim() === '' || authorInput.value.trim() === '') {
+                alert('Please fill out both fields');
+                return;
+            }
+
+            // Create list item element
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span><strong>${titleInput.value}</strong> by ${authorInput.value}</span>
+                <button class="delete-btn" onclick="deleteBook(this)">Delete</button>
+            `;
+
+            // Append to the list and clear inputs
+            bookList.appendChild(li);
+            titleInput.value = '';
+            authorInput.value = '';
+        }
+
+        function deleteBook(button) {
+            // Remove the parent li element of the clicked button
+            button.parentElement.remove();
+        }
+    </script>
+</body>
+</html>
