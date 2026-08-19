@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Book Manager</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; }
+        form { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { padding: 8px; flex: 1; }
+        button { padding: 8px 15px; background: #28a745; color: white; border: none; cursor: pointer; }
+        button.delete { background: #dc3545; }
+        ul { list-style: none; padding: 0; }
+        li { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd; align-items: center; }
+    </style>
+</head>
+<body>
+
+    <h2>📚 E-Book Management System</h2>
+
+    <!-- Form to Add Books -->
+    <form id="bookForm">
+        <input type="text" id="title" placeholder="Book Title" required>
+        <input type="text" id="author" placeholder="Author" required>
+        <button type="submit">Add Book</button>
+    </form>
+
+    <!-- Book List Display -->
+    <ul id="bookList">
+        <li><span><strong>The Great Gatsby</strong> by F. Scott Fitzgerald</span><button class="delete" onclick="this.parentElement.remove()">Delete</button></li>
+    </ul>
+
+    <script>
+        document.getElementById('bookForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const bookList = document.getElementById('bookList');
+
+            // Create new book row
+            const li = document.createElement('li');
+            li.innerHTML = `<span><strong>${title}</strong> by ${author}</span>
+                            <button class="delete" onclick="this.parentElement.remove()">Delete</button>`;
+            
+            bookList.appendChild(li);
+
+            // Clear inputs
+            document.getElementById('bookForm').reset();
+        });
+    </script>
+
+</body>
+</html>
